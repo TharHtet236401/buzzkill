@@ -1,8 +1,9 @@
 from django.shortcuts import render
-
+from .models import Transaction
 # Create your views here.
 def transactions(request):
-    return render(request, 'transactions/transactions.html')
+    transactions = Transaction.objects.all()
+    return render(request, 'transactions/transactions.html', {'transactions': transactions})
 
 def budget(request):
     return render(request, 'transactions/budget.html')
