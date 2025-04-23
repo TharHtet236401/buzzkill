@@ -11,6 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Mobile Menu Button:', mobileMenuButton);
     console.log('Mobile Menu:', mobileMenu);
 
+    function collapseMobileMenu() {
+        if (mobileMenu && menuOpenIcon && menuCloseIcon) {
+            mobileMenu.classList.add('hidden');
+            menuOpenIcon.classList.add('block');
+            menuOpenIcon.classList.remove('hidden');
+            menuCloseIcon.classList.add('hidden');
+            menuCloseIcon.classList.remove('block');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+        }
+    }
+
     if (mobileMenuButton) {
         mobileMenuButton.addEventListener('click', function() {
             console.log('Mobile menu clicked');
@@ -27,6 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
             menuCloseIcon.classList.toggle('hidden');
         });
     }
+
+    // Add click event listeners to mobile menu links
+    const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+    mobileMenuLinks?.forEach(link => {
+        link.addEventListener('click', () => {
+            collapseMobileMenu();
+        });
+    });
 
     // Profile dropdown
     const userMenuButton = document.querySelector('#user-menu-button');
