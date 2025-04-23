@@ -99,4 +99,40 @@ document.addEventListener('DOMContentLoaded', function() {
             hideMenu();
         }
     });
+
+    // Navigation active state management
+    document.body.addEventListener('htmx:beforeRequest', function(event) {
+        const clickedLink = event.detail.elt;
+        if (clickedLink.classList.contains('nav-link')) {
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('bg-gray-900', 'text-white');
+                link.classList.add('text-gray-300');
+            });
+
+            // Add active class to clicked link
+            clickedLink.classList.remove('text-gray-300');
+            clickedLink.classList.add('bg-gray-900', 'text-white');
+
+            // Store active section in localStorage
+            const section = clickedLink.getAttribute('data-nav-section');
+            if (section) {
+                localStorage.setItem('activeNavSection', section);
+            }
+        }
+    });
+
+    // Set initial active state from localStorage
+    const activeSection = localStorage.getItem('activeNavSection');
+    if (activeSection) {
+        const activeLink = document.querySelector(`[data-nav-section="${activeSection}"]`);
+        if (activeLink) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('bg-gray-900', 'text-white');
+                link.classList.add('text-gray-300');
+            });
+            activeLink.classList.remove('text-gray-300');
+            activeLink.classList.add('bg-gray-900', 'text-white');
+        }
+    }
 }); 
