@@ -62,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'transactions.context_processors.currency_settings',
             ],
         },
     },
@@ -115,6 +116,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Currency settings
+CURRENCY_SYMBOL = '₹'  # Change this to your preferred currency symbol
+CURRENCY_CODE = 'INR'  # Change this to your preferred currency code
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
