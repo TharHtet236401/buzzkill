@@ -43,6 +43,8 @@ def transactions(request):
         print(f"Error in transactions view: {str(e)}")
         return render(request, 'transactions/transactions.html', {'error': str(e)})
 
+
+
 def budget(request):
     return render(request, 'transactions/budget.html')
 
