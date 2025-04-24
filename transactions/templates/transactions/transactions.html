@@ -3,24 +3,7 @@
 {% block content %}
 
 <h1 class="text-3xl font-bold underline p-4">Transactions</h1>
-<!-- 
-<div class="p-4 flex items-center justify-between">
-    <button 
-        hx-get="{% url 'transactions' %}?date={{ previous_date|date:'Y-m-d' }}"
-        hx-target="#transaction-table"
-        class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
-        ← Previous Day
-    </button>
-    
-    <span class="text-lg font-semibold">{{ current_date|date:"F d, Y" }}</span>
-    
-    <button 
-        hx-get="{% url 'transactions' %}?date={{ next_date|date:'Y-m-d' }}"
-        hx-target="#transaction-table"
-        class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
-        Next Day →
-    </button>
-</div> -->
+
 
 <div class="p-4" id="transaction-table">
     {% include "transactions/partials/transaction-table.html" %}
