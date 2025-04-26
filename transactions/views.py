@@ -48,7 +48,9 @@ def add_transaction(request):
     if request.method == 'POST':
         form = TransactionForm(request.POST)
         if form.is_valid():
-            form.save()
+            transaction = form.save(commit=False)
+            transaction.user = request.user
+            transaction.save()
             return render(request, 'transactions/partials/transaction-table.html')
     else:
         form = TransactionForm()    
