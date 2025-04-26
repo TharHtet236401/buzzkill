@@ -1,5 +1,52 @@
-<form method="post" action="{% url 'add_transaction' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add Transaction</button>
-</form>
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <form method="post" action="{% url 'add_transaction' %}" class="bg-white shadow-md rounded px-12 pt-8 pb-10 mb-6 w-full max-w-lg">
+        {% csrf_token %}
+        <div class="mb-4">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="text-red-500 text-xs italic">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-4">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+            {% if form.description.errors %}
+                <div class="text-red-500 text-xs italic">{{ form.description.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-4">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+            {% if form.category.errors %}
+                <div class="text-red-500 text-xs italic">{{ form.category.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-4">
+            {{ form.amount.label_tag }}
+            {{ form.amount }}
+            {% if form.amount.errors %}
+                <div class="text-red-500 text-xs italic">{{ form.amount.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-4">
+            {{ form.currency.label_tag }}
+            {{ form.currency }}
+            {% if form.currency.errors %}
+                <div class="text-red-500 text-xs italic">{{ form.currency.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-4">
+            {{ form.date.label_tag }}
+            {{ form.date }}
+            {% if form.date.errors %}
+                <div class="text-red-500 text-xs italic">{{ form.date.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="flex items-center justify-between">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Add Transaction
+            </button>
+        </div>
+    </form>
+</div>

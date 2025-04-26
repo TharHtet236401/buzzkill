@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 from django.db.models import Min, Max
 from .form import TransactionForm
+from django.shortcuts import redirect
 
 # Create your views here.
 def transactions(request):
@@ -51,10 +52,18 @@ def add_transaction(request):
             transaction = form.save(commit=False)
             transaction.user = request.user
             transaction.save()
-            return render(request, 'transactions/partials/transaction-table.html')
+            return redirect('transactions')
+        else:
+            print("error")
+            if request.headers.get('HX-Request'):
+                response = render(request, 'transactions/partials/add-transaction-form.html', {'form': form})
+                response['HX-Retarget'] = '#transaction-body'
+                return response
+            else:
+                return render(request, 'transactions/transactions.html', {'form': form})
     else:
         form = TransactionForm()    
-    return render(request, 'transactions/partials/add-transaction-form.html', {'form': form})
+    return render(request, 'transactions/transactions.html', {'form': form})
 
 def budget(request):
     return render(request, 'transactions/budget.html')
