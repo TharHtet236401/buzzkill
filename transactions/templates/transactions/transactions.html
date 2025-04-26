@@ -2,12 +2,19 @@
 
 {% block content %}
 
-<h1 class="text-3xl font-bold underline p-4">Transactions</h1>
+<div id="transaction-body">
+
+    <div class="flex justify-between items-center">
+        <h1 class="text-3xl font-bold underline p-4">Transactions</h1>
+        <button class="bg-blue-500 text-white p-2 rounded-md" hx-get="{% url 'add_transaction' %}" hx-target="#transaction-body">Add Transaction</button>
+    </div>
 
 
-<div class="p-4" id="transaction-table">
-    {% include "transactions/partials/transaction-table.html" %}
-</div>
+    <div class="p-4" id="transaction-table">
+        {% include "transactions/partials/transaction-table.html" %}
+    </div>
+    </div>
+   
 
 {% endblock %}
 

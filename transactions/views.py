@@ -3,6 +3,7 @@ from .models import Transaction
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 from django.db.models import Min, Max
+from .form import TransactionForm
 
 # Create your views here.
 def transactions(request):
@@ -43,7 +44,15 @@ def transactions(request):
         print(f"Error in transactions view: {str(e)}")
         return render(request, 'transactions/transactions.html', {'error': str(e)})
 
-
+def add_transaction(request):
+    if request.method == 'POST':
+        form = TransactionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'transactions/partials/transaction-table.html')
+    else:
+        form = TransactionForm()    
+    return render(request, 'transactions/partials/add-transaction-form.html', {'form': form})
 
 def budget(request):
     return render(request, 'transactions/budget.html')
